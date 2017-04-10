@@ -34,6 +34,17 @@ class CurrentUser {
     func getReadPostIDs(completion: @escaping ([String]) -> Void) {
         var postArray: [String] = []
         // TODO
+        let dbRef = FIRDatabase.database().reference()
+        let refHandle = dbRef.child(firUsersNode).child(id).child(firReadPostsNode).observeSingleEvent(of: .value, with: { (snapshot) in
+        if snapshot.exists() {
+            if let readPost = snapshot.value as? [String: AnyObject] {
+                for key in readPost.keys {
+                    postArray.append(readPost[key] as! String)
+                }
+            }
+            }
+            completion(postArray)
+        })
     }
     
     /*
@@ -45,6 +56,8 @@ class CurrentUser {
     */
     func addNewReadPost(postID: String) {
         // TODO
+        let dbRef = FIRDatabase.database().reference()
+        dbRef.child(firUsersNode).child(id).child(firReadPostsNode).childByAutoId().setValue(postID)
     }
     
 }
