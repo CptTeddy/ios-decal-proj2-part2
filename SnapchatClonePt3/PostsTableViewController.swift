@@ -52,6 +52,7 @@ class PostsTableViewController: UIViewController, UITableViewDelegate, UITableVi
     */
     override func viewWillAppear(_ animated: Bool) {
         // YOUR CODE HERE
+        updateData()
     }
 
     override func didReceiveMemoryWarning() {

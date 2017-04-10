@@ -133,10 +133,13 @@ func getPosts(user: CurrentUser, completion: @escaping ([Post]?) -> Void) {
                         dateKey = date
                     }
                     let post = Post(id: key, username: userKey, postImagePath: pathKey, thread: threadKey, dateString: dateKey, read: readPosts.contains(key))
+                    postArray.append(post)
                 }
+                print(postArray)
                 completion(postArray)
                 })
         } else {
+//            print(postArray)
             completion(nil)
         }
         })
